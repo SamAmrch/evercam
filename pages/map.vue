@@ -18,7 +18,14 @@ const onMapReady = () => {
 }
 
 const redIcon = L.icon({
-  iconUrl: "/location.png",
+  iconUrl: "/Offline.png",
+  iconSize: [32, 32], // Adjust the size if needed
+  iconAnchor: [16, 32], // Center the icon properly
+  popupAnchor: [0, -32] // Position the popup correctly
+});
+
+const greenIcon = L.icon({
+  iconUrl: "/Online.png",
   iconSize: [32, 32], // Adjust the size if needed
   iconAnchor: [16, 32], // Center the icon properly
   popupAnchor: [0, -32] // Position the popup correctly
@@ -51,7 +58,7 @@ const redIcon = L.icon({
                 </LMarker>
             </div>
             <div v-else>
-                <LMarker :lat-lng="[camera.location.lat, camera.location.lng]">
+                <LMarker :lat-lng="[camera.location.lat, camera.location.lng]" :icon="greenIcon">
                     <LPopup>
                         {{ camera.name }}
                     </LPopup>
