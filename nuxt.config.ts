@@ -5,6 +5,15 @@ export default defineNuxtConfig({
   modules: [
     '@pinia/nuxt',
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/leaflet'
-  ]
+    '@nuxtjs/leaflet',
+  ],
+  plugins: [
+    '~/plugins/vuetify'
+  ],
+  css: [
+    'vuetify/styles'
+  ],
+  build: {
+    transpile: ['vuetify']
+  }
 })
