@@ -1,6 +1,22 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watchEffect } from "vue";
+import { useSupabaseUser, useRouter } from "#imports";
 import { useCameraStore } from "@/stores/cameraStore";
+
+// Protect page: Redirect if not authenticated
+definePageMeta({
+  middleware: "auth", // ✅ Middleware to protect page
+});
+
+const user = useSupabaseUser();
+const router = useRouter();
+
+// Redirect to login if user is not logged in
+watchEffect(() => {
+  if (!user.value) {
+    router.push("/login");
+  }
+});
 
 // Use store
 const cameraStore = useCameraStore();
@@ -17,7 +33,7 @@ const handleTabChange = (tab) => {
 </script>
 
 <template>
-  <v-container className="px-2">
+  <v-container class="px-2" v-if="user">
     <!-- Tabs for Filtering -->
     <v-tabs v-model="selectedTab" class="py-0">
       <v-tab value="all" @click="handleTabChange('all')">All</v-tab>
@@ -26,7 +42,7 @@ const handleTabChange = (tab) => {
 
     <!-- Camera List -->
     <v-card elevation="2" class="mt-2">
-      <v-container >
+      <v-container>
         <!-- Loading and Error Messages -->
         <v-alert v-if="cameraStore.loading" type="info" class="text-center">Loading cameras...</v-alert>
         <v-alert v-if="cameraStore.error" type="error" class="text-center">Error loading cameras.</v-alert>
@@ -44,7 +60,7 @@ const handleTabChange = (tab) => {
                 </v-col>
 
                 <!-- Camera Image or Offline Message -->
-                <v-col cols="0" class="text-center" justify="center">
+                <v-col cols="0" class="text-center">
                   <template v-if="camera.status === 'online'">
                     <a :href="`https://media.evercam.io/v2/cameras/${camera.id}/live/snapshot`">
                       <v-img :src="camera.src" alt="camera image" max-width="200px" />

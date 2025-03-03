@@ -1,19 +1,30 @@
 <script setup>
+import { useSupabaseClient, useSupabaseUser } from '#imports'
+import { useRouter } from 'vue-router' // ✅ Import useRouter
+
+const client = useSupabaseClient();
+const user = useSupabaseUser(); // Tracks logged-in user
+const router = useRouter(); // ✅ Initialize router
+
 const links = [
   { name: 'Cameras', href: '/cameras', id: 1 },
-  { name: 'Compare', href: '/compare', id: 2 },
-  { name: 'Map', href: '/map', id: 3 },
-  { name: 'Weather', href: '/weather', id: 4 },
+  { name: 'Map', href: '/map', id: 2 },
 ];
+
+// ✅ Logout function with proper redirect
+const logout = async () => {
+  await client.auth.signOut();
+  router.push('/'); // Redirect to login after logout
+};
 </script>
 
 <template>
   <v-responsive>
     <v-app theme="dark">
-      <NuxtLoadingIndicator color="blue" :throttle="0"/>
+      <NuxtLoadingIndicator color="blue" :throttle="0" />
 
-      <!-- Sidebar with Navigation Links -->
-      <v-navigation-drawer app>
+      <!-- Sidebar Navigation (Only visible when logged in) -->
+      <v-navigation-drawer v-if="user" app permanent>
         <v-list class="py-0">
           <v-list-item
             v-for="link in links"
@@ -24,6 +35,10 @@ const links = [
             class="d-flex justify-center align-center text-decoration-none px-4 py-2"
           >
             {{ link.name }}
+          </v-list-item>
+          <!-- Logout Button -->
+          <v-list-item @click="logout" class="text-red">
+            Logout
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
@@ -37,5 +52,3 @@ const links = [
     </v-app>
   </v-responsive>
 </template>
-
-

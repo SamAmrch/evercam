@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/leaflet',
+    '@nuxtjs/supabase'
   ],
   plugins: [
     '~/plugins/vuetify'
@@ -15,5 +16,13 @@ export default defineNuxtConfig({
   ],
   build: {
     transpile: ['vuetify']
+  },
+  supabase:{
+    redirectOptions: {
+    login: '/',
+    callback: '/cameras',
+    exclude: ['/register', '/login']
   }
+}
+  
 })
