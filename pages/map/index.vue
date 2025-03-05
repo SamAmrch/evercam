@@ -1,18 +1,13 @@
 <script setup>
 import { ref, watchEffect } from "vue";
 import { useSupabaseUser, useRouter } from "#imports";
+import L from 'leaflet'
 import { useCameraStore } from "@/stores/cameraStore";
 
 // Protect page: Redirect if not authenticated
 definePageMeta({
-  ssr: false,
   middleware: "auth", // ✅ Middleware to protect page
-});
-
-let L;
-
-onMounted(async () => {
-  L = await import("leaflet"); // ✅ Import Leaflet dynamically on client-side
+  layout: "default",
 });
 
 const user = useSupabaseUser();

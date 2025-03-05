@@ -1,10 +1,5 @@
 <template>
-  <v-container fluid className="p-0">
-    <v-row>
-      <!-- Main Content -->
-      <v-col>
-        <slot />
-      </v-col>
-    </v-row>
+  <v-container class="py-0 px-0 font-bold">
+        <slot />  
   </v-container>
 </template>

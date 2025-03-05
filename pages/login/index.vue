@@ -19,7 +19,7 @@ const login = async () => {
         if (error) throw error;
 
         // Redirect user after successful login
-        router.push('/logedIn/cameras');
+        router.push('/cameras');
 
     } catch (error) {
         errorMsg.value = error.message;

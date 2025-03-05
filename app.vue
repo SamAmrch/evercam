@@ -23,32 +23,44 @@ const logout = async () => {
     <v-app theme="dark">
       <NuxtLoadingIndicator color="blue" :throttle="0" />
 
-      <!-- Sidebar Navigation (Only visible when logged in) -->
-      <v-navigation-drawer v-if="user" app permanent>
-        <v-list class="py-0">
-          <v-list-item
-            v-for="link in links"
-            :key="link.id"
-            :to="link.href"
-            active-class="text-white bg-primary" 
-            exact-active-class="text-white bg-primary"
-            class="d-flex justify-center align-center text-decoration-none px-4 py-2"
-          >
-            {{ link.name }}
-          </v-list-item>
-          <!-- Logout Button -->
-          <v-list-item @click="logout" class="text-red">
+      <!-- ✅ Global Toolbar (Visible above everything) -->
+      <v-toolbar v-if="user" class="bg-grey-darken-4" height="48">
+          <v-img src="/evercam-logo.webp" max-height="84" max-width="120" class="mb-2"/>
+        <v-spacer></v-spacer>
+        <v-toolbar-items>
+          <v-btn @click="logout" class="text-red d-flex justify-center align-center text-decoration-none px-4 py-2">
             Logout
-          </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
+          </v-btn>
+        </v-toolbar-items>
+      </v-toolbar>
 
-      <!-- Main Content -->
-      <v-main>
-        <NuxtLayout>
-          <NuxtPage />
-        </NuxtLayout>
-      </v-main>
+      <v-container fluid class="d-flex py-0 px-0">
+        <!-- ✅ Sidebar as a Card (Only visible when logged in) -->
+        <v-card v-if="user" class=" bg-grey-darken-4 rounded-0" width="15%">
+          <v-list class="py-0">
+            <v-list-item
+              v-for="link in links"
+              :key="link.id"
+              :to="link.href"
+              active-class="text-white bg-blue-darken-1"
+              exact-active-class="text-white bg-primary"
+              class="d-flex justify-center align-center text-decoration-none px-4 py-2"
+            >
+              {{ link.name }}
+            </v-list-item>
+          </v-list>
+        </v-card>
+
+        <!-- ✅ Main Content -->
+        <v-main>
+          <NuxtLayout>
+            <NuxtPage />
+          </NuxtLayout>
+        </v-main>
+      </v-container>
+      
     </v-app>
   </v-responsive>
 </template>
+
+

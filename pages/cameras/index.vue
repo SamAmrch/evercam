@@ -2,10 +2,12 @@
 import { ref, watchEffect } from "vue";
 import { useSupabaseUser, useRouter } from "#imports";
 import { useCameraStore } from "@/stores/cameraStore";
+import { blue } from "vuetify/util/colors";
 
 // Protect page: Redirect if not authenticated
 definePageMeta({
   middleware: "auth", // ✅ Middleware to protect page
+  layout: "default", // ✅ Layout to use
 });
 
 const user = useSupabaseUser();
@@ -33,15 +35,15 @@ const handleTabChange = (tab) => {
 </script>
 
 <template>
-  <v-container class="px-2" v-if="user">
+  <v-container class="px-0 py-0" v-if="user">
     <!-- Tabs for Filtering -->
-    <v-tabs v-model="selectedTab" class="py-0">
+    <v-tabs v-model="selectedTab" class="py-0" color=" bg-blue-darken-1" grow="true">
       <v-tab value="all" @click="handleTabChange('all')">All</v-tab>
       <v-tab value="online" @click="handleTabChange('online')">Online</v-tab>
     </v-tabs>
 
     <!-- Camera List -->
-    <v-card elevation="2" class="mt-2">
+    <v-card elevation="2" class="mt-2 rounded-0">
       <v-container>
         <!-- Loading and Error Messages -->
         <v-alert v-if="cameraStore.loading" type="info" class="text-center">Loading cameras...</v-alert>
