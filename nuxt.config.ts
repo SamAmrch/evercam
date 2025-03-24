@@ -23,6 +23,11 @@ export default defineNuxtConfig({
     callback: '/cameras',
     exclude: ['/register', '/login']
   }
-}
+},
+runtimeConfig: {
+  public: {
+    EVERCAM_API: process.env.NUXT_PUBLIC_EVERCAM_API || "https://media.evercam.io/v2/public/cameras",
+  },
+},
   
 })
