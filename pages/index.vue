@@ -2,6 +2,11 @@
 import { useRouter } from '#imports';
 import { useCameraStore } from '@/stores/cameraStore';
 import { onMounted, computed, ref } from 'vue';
+import { useHead } from '#imports'
+
+useHead({
+  title: 'Welcome to Evercam' 
+})
 
 const router = useRouter();
 const cameraStore = useCameraStore();
@@ -16,7 +21,7 @@ const getRandomOnlineCamera = () => {
   }
 };
 
-// Fetch cameras on mount and set background
+// Fetch cameras + set background
 onMounted(async () => {
   await cameraStore.fetchCameras();
   getRandomOnlineCamera();

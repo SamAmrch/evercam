@@ -2,14 +2,20 @@
 import { ref, watchEffect } from "vue";
 import { useSupabaseUser, useRouter } from "#imports";
 import { useCameraStore } from "@/stores/cameraStore";
-import { blue } from "vuetify/util/colors";
+import { useHead } from '#imports'
 
-// Protect page: Redirect if not authenticated
+useHead({
+  title: 'Camera List' 
+})
+
+
 definePageMeta({
-  middleware: "auth", // ✅ Middleware to protect page
-  layout: "default", // ✅ Layout to use
+  middleware: "auth", 
+  layout: "default",
 });
 
+const cameraStore = useCameraStore();
+cameraStore.fetchCameras();
 const user = useSupabaseUser();
 const router = useRouter();
 
@@ -20,9 +26,6 @@ watchEffect(() => {
   }
 });
 
-// Use store
-const cameraStore = useCameraStore();
-cameraStore.fetchCameras();
 
 // Track the selected tab
 const selectedTab = ref("all");

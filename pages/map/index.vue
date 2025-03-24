@@ -3,15 +3,21 @@ import { ref, watchEffect } from "vue";
 import { useSupabaseUser, useRouter } from "#imports";
 import L from 'leaflet'
 import { useCameraStore } from "@/stores/cameraStore";
+import { useHead } from '#imports'
 
-// Protect page: Redirect if not authenticated
+useHead({
+  title: 'Map' 
+})
+
 definePageMeta({
-  middleware: "auth", // ✅ Middleware to protect page
+  middleware: "auth",
   layout: "default",
 });
 
 const user = useSupabaseUser();
 const router = useRouter();
+const map = ref(null)
+const cameraStore = useCameraStore();
 
 // Redirect to login if user is not logged in
 watchEffect(() => {
@@ -19,10 +25,6 @@ watchEffect(() => {
     router.push("/login");
   }
 });
-
-const map = ref(null)
-// Use store
-const cameraStore = useCameraStore();
 
 // Fetch cameras when the component loads
 cameraStore.fetchCameras();

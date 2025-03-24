@@ -2,6 +2,11 @@
 
 import { ref } from 'vue'
 import { useSupabaseClient, useRouter } from '#imports'
+import { useHead } from '#imports'
+
+useHead({
+  title: 'Register' 
+})
 
 const cameraStore = useCameraStore();
 const bgImage = ref("");

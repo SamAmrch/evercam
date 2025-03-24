@@ -1,17 +1,18 @@
 <script setup>
 import { useSupabaseClient, useSupabaseUser } from '#imports'
-import { useRouter } from 'vue-router' // ✅ Import useRouter
+import { useRouter } from 'vue-router'
 
 const client = useSupabaseClient();
-const user = useSupabaseUser(); // Tracks logged-in user
-const router = useRouter(); // ✅ Initialize router
+const user = useSupabaseUser(); 
+const router = useRouter(); 
+
 
 const links = [
   { name: 'Cameras', href: '/cameras', id: 1 },
   { name: 'Map', href: '/map', id: 2 },
 ];
 
-// ✅ Logout function with proper redirect
+// Logout function
 const logout = async () => {
   await client.auth.signOut();
   router.push('/'); // Redirect to login after logout
@@ -22,8 +23,6 @@ const logout = async () => {
   <v-responsive>
     <v-app theme="dark">
       <NuxtLoadingIndicator color="blue" :throttle="0" />
-
-      <!-- ✅ Global Toolbar (Visible above everything) -->
       <v-toolbar v-if="user" class="bg-grey-darken-4" height="48">
           <v-img src="/evercam-logo.webp" max-height="84" max-width="120" class="mb-2"/>
         <v-spacer></v-spacer>
@@ -35,7 +34,6 @@ const logout = async () => {
       </v-toolbar>
 
       <v-container fluid class="d-flex py-0 px-0">
-        <!-- ✅ Sidebar as a Card (Only visible when logged in) -->
         <v-card v-if="user" class=" bg-grey-darken-4 rounded-0" width="15%">
           <v-list class="py-0">
             <v-list-item
@@ -51,7 +49,6 @@ const logout = async () => {
           </v-list>
         </v-card>
 
-        <!-- ✅ Main Content -->
         <v-main>
           <NuxtLayout>
             <NuxtPage />

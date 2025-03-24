@@ -2,6 +2,11 @@
 
 import { ref } from 'vue'
 import { useSupabaseClient, useRouter } from '#imports'
+import { useHead } from '#imports'
+
+useHead({
+  title: 'Login' 
+})
 
 const cameraStore = useCameraStore();
 const bgImage = ref("");
@@ -20,7 +25,6 @@ const login = async () => {
         });
         if (error) throw error;
 
-        // Redirect user after successful login
         router.push('/cameras');
 
     } catch (error) {
@@ -28,7 +32,7 @@ const login = async () => {
     }
 }
 
-// Function to randomly select an online camera background
+// Function to randomly select a camera
 const getRandomOnlineCamera = () => {
   const onlineCameras = cameraStore.camTable.filter(cam => cam.status.toLowerCase() === "online");
   if (onlineCameras.length > 0) {
@@ -37,7 +41,7 @@ const getRandomOnlineCamera = () => {
   }
 };
 
-// Fetch cameras on mount and set background
+// Fetch cameras + set background
 onMounted(async () => {
   await cameraStore.fetchCameras();
   getRandomOnlineCamera();
