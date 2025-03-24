@@ -27,6 +27,7 @@ export default defineNuxtConfig({
 runtimeConfig: {
   public: {
     EVERCAM_API: process.env.NUXT_PUBLIC_EVERCAM_API || "https://media.evercam.io/v2/public/cameras",
+    EVERCAM_SNAPSHOT_URL: process.env.NUXT_PUBLIC_EVERCAM_SNAPSHOT_URL || "https://media.evercam.io/v2/cameras",
   },
 },
   
