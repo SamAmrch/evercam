@@ -76,6 +76,7 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 
 # Login/Register
 After building and running the app you'll be prompted to either login or register
+![Main page](https://github.com/SamAmrch/evercam/blob/main/public/screenshots/main.png)
 
 # Register
 Use your email and a password of your choice to register, once that is done you should receive a confirmation email
