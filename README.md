@@ -80,9 +80,12 @@ After building and running the app you'll be prompted to either login or registe
 
 # Register
 Use your email and a password of your choice to register, once that is done you should receive a confirmation email
+![Register page](https://github.com/SamAmrch/evercam/blob/main/public/screenshots/register.png)
 
 # Confirmation
 After registering check your inbox and click the confirmation link then go back to the website
+![Confirmation email](https://github.com/SamAmrch/evercam/blob/main/public/screenshots/email.png)
 
 # Login
 Now you can use your created email and password to access the website
+![Login page](https://github.com/SamAmrch/evercam/blob/main/public/screenshots/login.png)
