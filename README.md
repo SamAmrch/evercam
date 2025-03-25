@@ -73,3 +73,15 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+# Login/Register
+After building and running the app you'll be prompted to either login or register
+
+# Register
+Use your email and a password of your choice to register, once that is done you should receive a confirmation email
+
+# Confirmation
+After registering check your inbox and click the confirmation link then go back to the website
+
+# Login
+Now you can use your created email and password to access the website
